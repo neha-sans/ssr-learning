@@ -1,8 +1,9 @@
 import React from "react";
 import { renderToString } from "react-dom/server";
 import { Provider } from "react-redux";
+import { renderRoutes } from "react-router-config";
 import { StaticRouter } from "react-router-dom";
-import Routes from "../Routes";
+import routes from "../Routes";
 export default (req, store) => {
   const content = renderToString(
     <Provider store={store}>
@@ -10,7 +11,7 @@ export default (req, store) => {
         {/*
      context here is used to handle redirect
       and error handler it is somehow related to react*/}
-        <Routes />
+        {renderRoutes(routes)}
       </StaticRouter>
     </Provider>
   ); //  turn the components to HTML
