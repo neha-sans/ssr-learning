@@ -22,4 +22,8 @@ const mapDispatchToProps = {
   fetchUsers,
 };
 
+export const loadData = () => {
+  console.log("load data");
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(UserList);

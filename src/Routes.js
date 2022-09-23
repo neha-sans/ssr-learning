@@ -1,5 +1,5 @@
 import Home from "./client/components/Home.js";
-import UserList from "./client/components/UserList.js";
+import UserList, { loadData } from "./client/components/UserList.js";
 
 export default [
   {
@@ -10,5 +10,6 @@ export default [
   {
     path: "/users",
     component: UserList,
+    loadData,
   },
 ];
