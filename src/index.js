@@ -11,11 +11,13 @@ const app = express();
 app.use(express.static("public")); // to pick the client side bundle as freely available dir
 app.get("*", (req, res) => {
   const store = createStore(reducers, {}, applyMiddleware(thunk));
-  matchRoutes(routes, req.path).map(({ route }) =>
-    route.loadData ? route.loadData() : null
+  const promoises = matchRoutes(routes, req.path).map(({ route }) =>
+    route.loadData ? route.loadData(store) : null
   );
+  Promise.all(promoises).then(() => {
+    res.send(renderer(req, store));
+  });
   // some logic to init and load data in store
-  res.send(renderer(req, store));
 });
 
 app.listen(3000, () => {
